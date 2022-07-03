@@ -15,7 +15,7 @@ class Login extends React.Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount() { // Atualizar o estado do componente? Sim.
     this.didMount = true;
   }
 
