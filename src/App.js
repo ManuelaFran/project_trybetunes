@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import Login from './pages/Login';
 import Search from './pages/Search';
 import Album from './pages/Album';
@@ -11,15 +11,16 @@ import NotFound from './pages/NotFound';
 class App extends React.Component {
   render() {
     return (
-      <BrowserRouter>
-        <Route path="/" component={ Login } />
-        <Route path="/search" component={ Search } />
-        <Route path="/album/:id" component={ Album } />
-        <Route path="/favorites" component={ Favorites } />
-        <Route path="/profile" component={ Profile } />
-        <Route path="/profile/edit" component={ ProfileEdit } />
-        <Route path="*" component={ NotFound } />
-      </BrowserRouter>
+      <section>
+        <p>TrybeTunes</p>
+        <Route path="/" render={ (props) => <Login { ...props } /> } />
+        <Route path="/search" render={ (props) => <Search { ...props } /> } />
+        <Route path="/album/:id" render={ (props) => <Album { ...props } /> } />
+        <Route path="/favorites" render={ (props) => <Favorites { ...props } /> } />
+        <Route path="/profile" render={ (props) => <Profile { ...props } /> } />
+        <Route path="/profile/edit" render={ (props) => <ProfileEdit { ...props } /> } />
+        <Route path="*" render={ (props) => <NotFound { ...props } /> } />
+      </section>
     );
   }
 }
