@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { addSong, removeSong } from '../services/favoriteSongsAPI';
+import { getFavoriteSongs, addSong, removeSong } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
 
 class CheckFavorites extends React.Component {
@@ -11,6 +11,20 @@ class CheckFavorites extends React.Component {
       isFavorite: false,
       loading: false,
     };
+  }
+
+  componentDidMount() {
+    this.isFavorited();
+  }
+
+  isFavorited = async () => {
+    const { trackInfo: { trackId } } = this.props;
+    const favoriteSongs = await getFavoriteSongs();
+    const isFavorite = favoriteSongs
+      ? favoriteSongs.some((track) => track.trackId === trackId)
+      : false;
+    this.setState({ isFavorite });
+    return isFavorite;
   }
 
   onFavoriteClick = async (isFavorite) => {
